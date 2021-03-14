@@ -1,9 +1,9 @@
 # Inkdrop.alfredworkflow
 
-Note: Currently in beta.
+Note: Currently in beta (Inkdrop >= [v5.3.0-beta.1](https://docs.inkdrop.app/releases-beta)).
 
 This is the [Inkdrop](https://www.inkdrop.app/) Alfred workflow.
-Inkdrop lets users instantly search their notes through [the local database server endpoint](https://beta.docs.inkdrop.app/manual/accessing-the-local-database/#accessing-via-http-advanced).
+It lets users instantly search their notes through [the local database server endpoint](https://beta.docs.inkdrop.app/manual/accessing-the-local-database/#accessing-via-http-advanced).
 
 For more information, check out [Inkdrop's webpage](https://www.inkdrop.app/).
 
