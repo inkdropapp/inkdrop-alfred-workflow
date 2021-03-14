@@ -7,15 +7,19 @@ Inkdrop lets users instantly search their notes through [the local database serv
 
 For more information, check out [Inkdrop's webpage](https://www.inkdrop.app/).
 
-# Configuration
+## Download
 
-## 1. Set up the local http server
+Go to [the Releases page](https://github.com/inkdropapp/inkdrop-alfred-workflow/releases).
+
+## Configuration
+
+### 1. Set up the local http server
 
 The workflow accesses your notes via HTTP locally.
 You have to configure the app to open a HTTP endpoint.
 See [the instruction on the documentation](https://beta.docs.inkdrop.app/manual/accessing-the-local-database/#accessing-via-http-advanced) for more detail.
 
-## 2. Set up the workflow
+### 2. Set up the workflow
 
 Click `[x]` button to configure environment variables of the workflow.
 
@@ -25,13 +29,13 @@ Specify your server configuration.
 
 ![configure server][configure-2]
 
-# Usage
+## Usage
 
 You can search using `ink {query}` in Alfred. You can use [the same qualifiers](https://docs.inkdrop.app/manual/searching-notes/#filter-notes-with-special-qualifiers) for filtering notes.
 
 ![screenshot][workflow]
 
-# Contributions
+## Contributions
 
 If you'd like to extend the functionality of this workflow in any way, open an issue or send a pull request.
 
