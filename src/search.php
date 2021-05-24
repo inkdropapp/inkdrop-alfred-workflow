@@ -17,8 +17,10 @@ class Inkdrop {
   public function search($query) {
     $wf = new Workflows();
 
-    $baseUrl = "http://{$this->username}:{$this->password}@{$this->hostname}:{$this->port}";
-    $json = $wf->request( $baseUrl."/notes/?limit=20&keyword=".urlencode( $query ) );
+    $authOptions = [CURLOPT_USERPWD => "{$this->username}:{$this->password}"];
+
+    $baseUrl = "http://{$this->hostname}:{$this->port}";
+    $json = $wf->request( $baseUrl."/notes/?limit=20&keyword=".urlencode( $query ) , $authOptions);
     $json = json_decode($json);
     $int = 1;
 
