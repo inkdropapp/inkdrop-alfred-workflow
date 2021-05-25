@@ -1,7 +1,9 @@
 name: Create Alfred Workflow
 
 on:
-  - push
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build:
