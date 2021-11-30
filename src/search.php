@@ -20,7 +20,7 @@ class Inkdrop {
     $authOptions = [CURLOPT_USERPWD => "{$this->username}:{$this->password}"];
 
     $baseUrl = "http://{$this->hostname}:{$this->port}";
-    $json = $wf->request( $baseUrl."/notes/?limit=20&keyword=".urlencode( $query ) , $authOptions);
+    $json = $wf->request($baseUrl."/notes/?limit=20&keyword=".urlencode( $query ), $authOptions);
     $json = json_decode($json);
     $int = 1;
 
@@ -28,7 +28,7 @@ class Inkdrop {
       $data = $sugg;
       $noteId = $data->{'_id'};
       $bookId = $data->bookId;
-      $book = json_decode($wf->request( $baseUrl."/".$bookId ));
+      $book = json_decode($wf->request($baseUrl."/".$bookId, $authOptions));
       $uri = 'inkdrop://'.str_replace(':', '/', "${noteId}");
       $wf->result($int.'.'.time(), $uri, $data->title, $book->name, 'icon.png');
       $int++;
