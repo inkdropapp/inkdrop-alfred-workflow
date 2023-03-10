@@ -29,7 +29,7 @@ class Inkdrop {
       $noteId = $data->{'_id'};
       $bookId = $data->bookId;
       $book = json_decode($wf->request($baseUrl."/".$bookId, $authOptions));
-      $uri = 'inkdrop://'.str_replace(':', '/', "${noteId}");
+      $uri = 'inkdrop://'.str_replace(':', '/', "{$noteId}");
       $wf->result($int.'.'.time(), $uri, $data->title, $book->name, 'icon.png');
       $int++;
     endforeach;
