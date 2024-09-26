@@ -41,4 +41,35 @@ class Inkdrop {
 
     return $wf->toxml();
   }
+
+  function buildUri($noteId) {
+    $uri = 'inkdrop://'.str_replace(':', '/', "{$noteId}");
+
+    return $uri;
+  }
+
+  public function create($title, $body, $notebook, $tags) {
+    $wf = new Workflows();
+
+    $options = [
+      CURLOPT_USERPWD => "{$this->username}:{$this->password}",
+      CURLOPT_RETURNTRANSFER => 1,
+      CURLOPT_HTTPHEADER => array("Content-Type: application/json"),
+      CURLOPT_POSTFIELDS => json_encode( array(
+        "doctype" => "markdown",
+        "bookId" => $notebook,
+        "status" => "active",
+        "share" => "private",
+        "title" => trim($title),
+        "body" => trim($body),
+        "tags" => $tags,
+      ) ),
+    ];
+    $baseUrl = "http://{$this->hostname}:{$this->port}";
+
+    $result = $wf->request($baseUrl."/notes", $options);
+    $result = json_decode($result);
+
+    return boolval($result->{'ok'});
+  }
 }

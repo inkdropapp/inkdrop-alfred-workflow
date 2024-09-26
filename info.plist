@@ -21,11 +21,24 @@
 				<false/>
 			</dict>
 		</array>
+        <key>CD33299D-7496-4C05-8B1A-63BF2FBEE607</key>
+        <array>
+            <dict>
+                <key>destinationuid</key>
+                <string>8A7BF69A-B043-4854-9DE8-A5760ED9B240</string>
+                <key>modifiers</key>
+                <integer>0</integer>
+                <key>modifiersubtext</key>
+                <string></string>
+                <key>vitoclose</key>
+                <false/>
+            </dict>
+        </array>
 	</dict>
 	<key>createdby</key>
 	<string>Takuya Matsuyama</string>
 	<key>description</key>
-	<string>Search notes in Inkdrop</string>
+	<string>Inkdrop search and quick add notes</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -81,7 +94,7 @@
 				<key>script</key>
 				<string>&lt;?php
 
-require_once("search.php");
+require_once("inkdrop.php");
 $query = $argv[1];
 $host = getenv('host');
 $port = getenv('port');
@@ -113,9 +126,77 @@ echo $result;
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+        <dict>
+            <key>config</key>
+            <dict>
+                <key>concurrently</key>
+                <false/>
+                <key>escaping</key>
+                <integer>102</integer>
+                <key>script</key>
+                <string>&lt;?php
+
+require_once("inkdrop.php");
+
+$query = $argv[1];
+
+$host = getenv('host');
+$port = getenv('port');
+$username = getenv('username');
+$password = getenv('password');
+
+$inkdrop = new Inkdrop($host, $port, $username, $password);
+
+$args = explode(":", $query, 2);
+$title = $args[0];
+$body = $args[1];
+
+$tags = explode(",", getenv('defaultTags'));
+$notebook = getenv('defaultNotebook');
+
+$result = $inkdrop-&gt;create($title, $body, $notebook, $tags);
+
+echo $result;
+
+?&gt;</string>
+                <key>scriptargtype</key>
+                <integer>1</integer>
+                <key>scriptfile</key>
+                <string></string>
+                <key>type</key>
+                <integer>1</integer>
+            </dict>
+            <key>type</key>
+            <string>alfred.workflow.action.script</string>
+            <key>uid</key>
+            <string>8A7BF69A-B043-4854-9DE8-A5760ED9B240</string>
+            <key>version</key>
+            <integer>2</integer>
+        </dict>
+        <dict>
+            <key>config</key>
+            <dict>
+                <key>argumenttype</key>
+                <integer>0</integer>
+                <key>keyword</key>
+                <string>ink+</string>
+                <key>subtext</key>
+                <string>&lt;title&gt;:&lt;contents&gt;</string>
+                <key>text</key>
+                <string>Create a new note on Inkdrop</string>
+                <key>withspace</key>
+                <true/>
+            </dict>
+            <key>type</key>
+            <string>alfred.workflow.input.keyword</string>
+            <key>uid</key>
+            <string>CD33299D-7496-4C05-8B1A-63BF2FBEE607</string>
+            <key>version</key>
+            <integer>1</integer>
+        </dict>
 	</array>
 	<key>readme</key>
-	<string>Searches notes in Inkdrop</string>
+	<string>Inkdrop search and quick add notes</string>
 	<key>uidata</key>
 	<dict>
 		<key>6BC7C572-CCFB-48C6-91C7-42F7E3169F6D</key>
@@ -132,9 +213,27 @@ echo $result;
 			<key>ypos</key>
 			<integer>65</integer>
 		</dict>
+        <key>CD33299D-7496-4C05-8B1A-63BF2FBEE607</key>
+        <dict>
+            <key>xpos</key>
+            <integer>65</integer>
+            <key>ypos</key>
+            <integer>330</integer>
+        </dict>
+        <key>8A7BF69A-B043-4854-9DE8-A5760ED9B240</key>
+        <dict>
+            <key>xpos</key>
+            <integer>270</integer>
+            <key>ypos</key>
+            <integer>330</integer>
+        </dict>
 	</dict>
 	<key>variables</key>
 	<dict>
+		<key>defaultNotebook</key>
+		<string>book:book-id</string>
+		<key>defaultTags</key>
+		<string>tag:tag-id</string>
 		<key>host</key>
 		<string>localhost</string>
 		<key>password</key>
