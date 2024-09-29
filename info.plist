@@ -151,7 +151,7 @@ $args = explode(":", $query, 2);
 $title = $args[0];
 $body = $args[1];
 
-$tags = explode(",", getenv('defaultTags'));
+$tags = getenv('defaultTags');
 $notebook = getenv('defaultNotebook');
 
 $result = $inkdrop-&gt;create($title, $body, $notebook, $tags);

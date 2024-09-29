@@ -51,19 +51,24 @@ class Inkdrop {
   public function create($title, $body, $notebook, $tags) {
     $wf = new Workflows();
 
-    $options = [
-      CURLOPT_USERPWD => "{$this->username}:{$this->password}",
-      CURLOPT_RETURNTRANSFER => 1,
-      CURLOPT_HTTPHEADER => array("Content-Type: application/json"),
-      CURLOPT_POSTFIELDS => json_encode( array(
-        "doctype" => "markdown",
+    $payload = array(
+      "doctype" => "markdown",
         "bookId" => $notebook,
         "status" => "active",
         "share" => "private",
         "title" => trim($title),
-        "body" => trim($body),
-        "tags" => $tags,
-      ) ),
+        "body" => trim($body) ?? '',
+    );
+
+    if (!empty($tags)) {
+      $payload["tags"] = explode(",", $tags);
+    }
+
+    $options = [
+      CURLOPT_USERPWD => "{$this->username}:{$this->password}",
+      CURLOPT_RETURNTRANSFER => 1,
+      CURLOPT_HTTPHEADER => array("Content-Type: application/json"),
+      CURLOPT_POSTFIELDS => json_encode($payload),
     ];
     $baseUrl = "http://{$this->hostname}:{$this->port}";
 
