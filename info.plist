@@ -231,9 +231,9 @@ echo $result;
 	<key>variables</key>
 	<dict>
 		<key>defaultNotebook</key>
-		<string>book:book-id</string>
+		<string></string>
 		<key>defaultTags</key>
-		<string>tag:tag-id</string>
+		<string></string>
 		<key>host</key>
 		<string>localhost</string>
 		<key>password</key>
