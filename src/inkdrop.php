@@ -7,6 +7,8 @@ class Inkdrop {
   private $username;
   private $password;
 
+  private $defaultErrorMsg = "Failed to create a new Indrop note";
+
   function __construct ( $hostname, $port, $username, $password ) {
     $this->hostname = $hostname;
     $this->port = $port;
@@ -75,6 +77,20 @@ class Inkdrop {
     $result = $wf->request($baseUrl."/notes", $options);
     $result = json_decode($result);
 
-    return boolval($result->{'ok'});
+    if ($result == null) {
+      return $this->defaultErrorMsg;
+    }
+
+    if (!$result->{'ok'}) {
+      if (str_contains($result->{'error'}, 'invalid tag')) {
+        return "Invalid tag IDs,Please check the tag IDs you specified in your workflow config" ;
+      }
+
+      if (str_contains($result->{'error'}, 'note document')) {
+        return "Failed to create a new Inkdrop note,You have to specify a notebook ID in your workflow config";
+      }
+
+      return $this->defaultErrorMsg;
+    }
   }
 }
