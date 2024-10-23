@@ -7,7 +7,7 @@ class Inkdrop {
   private $username;
   private $password;
 
-  private $defaultErrorMsg = "Failed to create a new Indrop note";
+  private $defaultErrorMsg = "Failed to create a new Inkdrop note";
 
   function __construct ( $hostname, $port, $username, $password ) {
     $this->hostname = $hostname;
