@@ -194,9 +194,7 @@ $password = getenv('password');
 
 $inkdrop = new Inkdrop($host, $port, $username, $password);
 
-$args = explode(":", $query, 2);
-$title = $args[0];
-$body = $args[1];
+[$title, $body] = array_pad(explode(":", $query), 2, '');
 
 $tags = getenv('defaultTags');
 $notebook = getenv('defaultNotebook');
