@@ -59,7 +59,7 @@ class Inkdrop {
         "status" => "active",
         "share" => "private",
         "title" => trim($title),
-        "body" => trim($body) ?? '',
+        "body" => trim($body),
     );
 
     if (!empty($tags)) {
